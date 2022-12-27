@@ -1,0 +1,5 @@
+.idea
+.vscode
+.prettierrc
+.eslintrc.js
+node_modules
