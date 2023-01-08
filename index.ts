@@ -1,34 +1,52 @@
+/**
+ * @experimentalDecorators have to be "true" in tsconfig.json
+ */
 function Builder<T extends { new (...args: any[]): {} }>(constructor: T) {
+  const temp = new constructor();
+  const keys = Object.keys(temp);
   return class extends constructor {
     static Builder = class {
       constructor() {
-        console.log("Builder T");
+        /**
+         * create fields varible
+         * @noImplicitAny have to be "false" in tsconfig.json
+         */
+        for (let key of keys) {
+          Object.defineProperties(this, {
+            /**
+             * create fields varible
+             */
+            ["_" + key]: {
+              value: (temp as this)[key],
+              enumerable: true,
+              writable: true,
+            },
+            [key]: {
+              value: (newValue: any) => {
+                (this as any)["_" + key] = newValue;
+                return this;
+              },
+              enumerable: true,
+            },
+          });
+        }
       }
 
       build() {
-        return new constructor(123, "456");
+        return new constructor(
+          ...Object.keys(this)
+            .filter((e) => (e.startsWith("_") ? true : false))
+            .map((e) => this[e])
+        );
       }
     };
   };
 }
 
-class BuilderMethods {
+class BuilderInit {
   static Builder = class {
     build() {}
+
+    [props: string]: Function;
   };
 }
-
-@Builder
-class Test extends BuilderMethods {
-  val_1?: number;
-  val_2?: string;
-
-  constructor(val_1: number, val_2: string) {
-    super();
-    if (val_1) this.val_1 = val_1;
-    if (val_2) this.val_2 = val_2;
-    console.log("Test Class");
-  }
-}
-
-console.log(new Test.Builder().build());
