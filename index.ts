@@ -34,7 +34,7 @@ export function Builder<T extends { new (...args: any[]): {} }>(
         }
       }
 
-      build(filter: boolean = false) {
+      build() {
         return new constructor(
           ...Object.keys(this)
             .filter((e) => (e.startsWith("_") ? true : false))

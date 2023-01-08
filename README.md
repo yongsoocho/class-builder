@@ -1,4 +1,4 @@
-# 😁 class-builder
+# class-builder
 
 This library helps you use 'Builder Pattern' in just 3 sec.
 
