@@ -1,12 +1,13 @@
-## class-builder
+# class-builder
 
 This library help you use 'Builder Pattern' in TypeScript in just 3 sec.
 
----
+You should read [TS doc](https://www.typescriptlang.org/docs/handbook/decorators.html) first.
 
-## Usage
 
-Input Example
+## 💁‍♂️ Usage
+
+### Input Example
 
 1. use "@Builder" decorator on the top of class
 2. extends "BuilderInit" class with your class
@@ -25,7 +26,7 @@ class Example extends BuilderInit {
 }
 ```
 
-Output Example
+### Output Example
 
 ```
 const some = new Example.Builder()
@@ -34,8 +35,7 @@ const some = new Example.Builder()
   .field3("baz")
   .build();
 
-// on your console
-Example { field1: 'foo', field2: 'bar', field3: 'baz' }
+Example { field1: 'foo', field2: 'bar', field3: 'baz' } // on your console
 ```
 
 ---
