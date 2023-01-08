@@ -2,6 +2,8 @@
 
 This library help you use 'Builder Pattern' in TypeScript in just 3 sec.
 
+---
+
 ## Usage
 
 Input Example
@@ -35,3 +37,5 @@ const some = new Example.Builder()
 // on your console
 Example { field1: 'foo', field2: 'bar', field3: 'baz' }
 ```
+
+---
