@@ -3,3 +3,4 @@
 .prettierrc
 .eslintrc.js
 node_modules
+playground.ts

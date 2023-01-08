@@ -1,7 +1,9 @@
 /**
  * @experimentalDecorators have to be "true" in tsconfig.json
  */
-function Builder<T extends { new (...args: any[]): {} }>(constructor: T) {
+export function Builder<T extends { new (...args: any[]): {} }>(
+  constructor: T
+) {
   const temp = new constructor();
   const keys = Object.keys(temp);
   return class extends constructor {
@@ -32,7 +34,7 @@ function Builder<T extends { new (...args: any[]): {} }>(constructor: T) {
         }
       }
 
-      build() {
+      build(filter: boolean = false) {
         return new constructor(
           ...Object.keys(this)
             .filter((e) => (e.startsWith("_") ? true : false))
@@ -43,7 +45,7 @@ function Builder<T extends { new (...args: any[]): {} }>(constructor: T) {
   };
 }
 
-class BuilderInit {
+export class BuilderInit {
   static Builder = class {
     build() {}
 
